@@ -1,5 +1,10 @@
-public class EmpWageBuilder {
- public static void main(String args[]) {
-    System.out.println("Welcome to employee wage computation program");
- }
+public class EmpWageBuilder{
+	public static void main(String args[]) {
+	  int isPresent=1;
+	  double empCheck= Math.floor(Math.random()*10)%2;
+	  if(empCheck == isPresent)
+		System.out.println("employee is present");
+	  else
+		System.out.println("employee is absent");
+	}
 }
