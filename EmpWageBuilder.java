@@ -1,32 +1,32 @@
-public class EmpWageBuilder{
-	public static void main(String args[]) {
-		int Parttime=4;
-		int Fulltime=8;
-		final int isParttime=1;
-		final int isFulltime=2;
-		int Rateperhr=20;
-		int Hr=0;
-		int totalEmpWage=0;
-		int totalworkingday=0;
-		while(Hr < 100 && totalworkingday < 20)
-		{
-		   double empCheck = Math.floor(Math.random() * 10) % 3;
-		   int check=(int)empCheck;
-		    switch(check)
-			{
-			case isParttime:
-				          totalEmpWage+=Rateperhr*Parttime;
-				          Hr+=Parttime;
-				          totalworkingday+=1;
-				          break;
-			case isFulltime:
-				          totalEmpWage+=Rateperhr*Fulltime;
-				          Hr+=Fulltime;
-				          totalworkingday+=1;
-			default:
-			}
+public class EmpWageBuilder {
+	public static final int IS_PART_TIME = 1;
+	public static final int IS_FULL_TIME = 2;
+	public static final int EMP_RATE_PER_HOUR = 20;
+	public static final int NUM_OF_WORKING_DAYS = 20;
+	public static final int MAX_HRS_IN_MONTH = 100;
+	public static int computeEmpwage() {
+	int empHrs = 0, totalEmpHrs = 0,totalWorkingDays = 0;
+	while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS){
+                totalWorkingDays++;
+		int empCheck = (int) Math.floor(Math.random() *10) % 3;
+		switch (empCheck) {
+		       case IS_PART_TIME:
+			                   empHrs = 4;
+			                   break;
+		       case IS_FULL_TIME:
+			                   empHrs = 8;
+			                   break;
+		       default:
+			         empHrs = 0;
 		}
-		   System.out.println("Hours="+Hr+"Workingdays="+totalworkingday);
-		   System.out.println("Salary="+totalEmpWage);
-         }
+		   totalEmpHrs += empHrs;
+		   System.out.println("Daye#: "+ totalWorkingDays + "Emp HE: " +empHrs);
+	}
+	   int totalEmpwage = totalEmpHrs * EMP_RATE_PER_HOUR;
+	   System.out.println ("Total Emp Wage: "+totalEmpwage);
+	   return totalEmpwage;
+}
+	public static void main(String args[]) {
+	   computeEmpwage();
+	}
 }
