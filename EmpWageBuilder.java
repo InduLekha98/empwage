@@ -1,50 +1,51 @@
-public class EmpWageBuilderUC9{
-	public static final int IS_PART_TIME = 1;
-	public static final int IS_FULL_TIME = 2;
+public class EmpWageBuilder {
+    public static final int IS_FULL_TIME = 1;
+    public static final int IS_PART_TIME = 2;
 
-	private final String company;
-	private final int empRatePerHour;
-	private final int numofWorkingDays;
-	private final int maxHoursPerMonth;
-	private int totalEmpwage;
+    private final String company;
+    private final int wagePerHour;
+    private final int numOfWorkingDays;
+    private final int maxHoursPerMonth;
 
-	public EmpWage(String company, int empRatePerHour, int numofWorkingDays,int maxHoursPerMonth){
-		this.company = company;
-		this.empRatePerHour = empRatePerHour;
-		this.numofWorkingDays = numofWorkingDays;
-		this.maxHoursPerMonth = maxHoursPerMonth;
-	}
+    public EmpWageBuilder(String company, int wagePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
+    	this.company = company;
+    	this.wagePerHour = wagePerHour;
+    	this.numOfWorkingDays = numOfWorkingDays;
+    	this.maxHoursPerMonth = maxHoursPerMonth;
+    }
 
-	public void computeEmpwage()
-	{
-	  int empHrs = 0, totalEmpHrs = 0,totalWorkingDays = 0;
-	  while (totalEmpHrs <= maxHoursPerMonth && totalWorkingDays < numofWorkingDays){
-		totalWorkingDays++;
-		int empCheck = (int) Math.floor(Math.random() *10) % 3;
-		switch (empCheck) {
-		  case IS_PART_TIME:
-			              empHrs = 4;
-			              break;
-		  case IS_FULL_TIME:
-			              empHrs = 8;
-			              break;
-		   default:
-			     empHrs = 0;
-	}
-		totalEmpHrs += empHrs;
-		System.out.println("Daye#: "+ totalWorkingDays + "Emp Hr: " +empHrs);
-	}
-	   totalEmpwage = totalEmpHrs * empRatePerHour;
+    private int computeEmpWage() {
+        int dailyWage = 0, monthlyWage = 0, totalWorkingHours = 0, totalWorkingDays = 0, empHr = 0;
+        while (totalWorkingHours < maxHoursPerMonth && totalWorkingDays < numOfWorkingDays) {
+            double empCheck = Math.floor(Math.random() * 10) % 3;
+            switch ((int)empCheck) {
+                case IS_FULL_TIME:
+                    		    empHr = 8;
+                                    break;
+                case IS_PART_TIME:
+                    		    empHr = 4;
+                                    break;
+                default:
+                    		    empHr = 0;
+            }
+              totalWorkingHours += empHr;
+              dailyWage = (wagePerHour * empHr);
+              monthlyWage += dailyWage;
+              totalWorkingDays++;
+          }
+            return monthlyWage;
+    }
+
+    public static void main(String[] args) {
+    	System.out.println("Welcome to Employee Wage Computation Program on Master Branch");
+    	EmpWageBuilder dMart = new EmpWageBuilder("DMart", 20, 13, 50);
+	EmpWageBuilder reliance = new EmpWageBuilder("RELIANCE", 23, 15, 70);
+	EmpWageBuilder tataMotors = new EmpWageBuilder("TATA MOTORS", 18, 19, 130);
+	System.out.println("The total monthly Wage of the Employee of the company " + dMart.company + " is " + dMart.computeEmpWage());
+	System.out.println("The total monthly Wage of the Employee of the company " + reliance.company + " is " + reliance.computeEmpWage());
+	System.out.println("The total monthly Wage of the Employee of the company " + tataMotors.company + " is " + tataMotors.computeEmpWage());
+    }
+
 }
-public String toString() {
-	   return "Total Emp Wage for company: " +company+" is :"+totalEmpwage;
-}
-	public static void main(String args[]) {
-		EmpWage dMart = new EmpWage("Dmart", 20, 20, 100);
-		EmpWage relaince = new EmpWage("Relaince", 10, 25, 200);
-		dMart.computeEmpwage();
-		System.out.println(dMart);
-		relaince.computeEmpwage();
-		System.out.println(relaince);
-		}
-}
+
+
